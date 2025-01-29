@@ -1,0 +1,532 @@
+package mediagnosis.rules;
+
+import mediagnosis.pojos.*;
+
+rule "Double Vision Presence"
+salience 300
+when
+    $symptom : DoubleVision(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+end
+
+rule "Eye Discomfort Score"
+salience 300
+when
+    $symptom : EyeDiscomfort(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setSarcoidCount($diagnosis.getSarcoidCount() + 1);
+end
+
+
+rule "Involunt Eye Mov Score"
+salience 300
+when
+    $symptom : InvoluntaryEyeMovement(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+end
+
+rule "Vision Loss Score"
+salience 300
+when
+    $symptom : VisionLossOneEye(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setSarcoidCount($diagnosis.getSarcoidCount() + 1);
+    $diagnosis.setCNSCount($diagnosis.getCNSCount() + 1);
+end
+
+rule "Balance Loss Score"
+salience 300
+when
+    $symptom : LossOfBalance(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+    $diagnosis.setCNSCount($diagnosis.getCNSCount() + 1);
+end
+
+rule "Muscle Spasm Score"
+salience 300
+when
+    $symptom : MuscleSpasm(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+end
+
+rule "Numbnes or abnormal sensation Score"
+salience 300
+when
+    $symptom : NumbnessOrAbnormalSensation(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setCNSCount($diagnosis.getCNSCount() + 1);
+end
+
+rule "Facial Pain or Paralysis Score"
+salience 300
+when
+    $symptom : FacialPainOrParalysis(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+    $diagnosis.setSarcoidCount($diagnosis.getSarcoidCount() + 1);
+end
+
+rule "Tingling Score"
+salience 300
+when
+    $symptom : TinglingOrItchingArmsAndLegs(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+end
+
+rule "Moving arms or legs Score"
+salience 300
+when
+    $symptom : ProblemsMovingArmsAndLegs(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+end
+
+rule "Walking difficulties Score"
+salience 300
+when
+    $symptom : WalkingDifficulties(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+end
+
+rule "Coordination Score"
+salience 300
+when
+    $symptom : CoordinationProblems(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+end
+
+rule "Muscle stiffness Score"
+salience 300
+when
+    $symptom : MuscleStiffness(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+    $diagnosis.setSarcoidCount($diagnosis.getSarcoidCount() + 1);
+    $diagnosis.setSLECount($diagnosis.getSLECount() + 1);
+    $diagnosis.setSjogrenCount($diagnosis.getSjogrenCount() + 1);
+    $diagnosis.setCNSCount($diagnosis.getCNSCount() + 1);
+end
+
+rule "Electric Shocks Score"
+salience 300
+when
+    $symptom : ElectricShocksNeckMovement(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+end
+
+rule "Constipation Score"
+salience 300
+when
+    $symptom : Constipation(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+end
+
+rule "Fecal incontinence Score"
+salience 300
+when
+    $symptom : FecalIncontinence(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 1);
+end
+
+
+rule "Difficult urination Score"
+salience 300
+when
+    $symptom : DifficultyStartingUrination(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+end
+
+rule "Frequent Urintion Score"
+salience 300
+when
+    $symptom : FrequentUrination(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setSarcoidCount($diagnosis.getSarcoidCount() + 1);
+end
+
+rule "Urinary incontinence Score"
+salience 300
+when
+    $symptom : UrinaryIncontinence(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+end
+
+rule "Severe Fatigue Score"
+salience 300
+when
+    $symptom : SevereFatigue(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+    $diagnosis.setSarcoidCount($diagnosis.getSarcoidCount() + 1);
+    $diagnosis.setSLECount($diagnosis.getSLECount() + 1);
+    $diagnosis.setSjogrenCount($diagnosis.getSjogrenCount() + 1);
+    $diagnosis.setCNSCount($diagnosis.getCNSCount() + 1);
+end
+
+rule "Depression Score"
+salience 300
+when
+    $symptom : Depression(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+    $diagnosis.setSLECount($diagnosis.getSLECount() + 1);
+end
+
+rule "Attention Score"
+salience 300
+when
+    $symptom : DecreasedAttentionSpan(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 3);
+end
+
+rule "Memory Score"
+salience 300
+when
+    $symptom : MemoryLoss(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+    $diagnosis.setSLECount($diagnosis.getSLECount() + 1);
+    $diagnosis.setCNSCount($diagnosis.getCNSCount() + 1);
+end
+
+rule "Discern Score"
+salience 300
+when
+    $symptom : DecreasedAbilityToDiscern(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setvitB12Count($diagnosis.getvitB12Count() + 1);
+end
+
+rule "Dizziness Score"
+salience 300
+when
+    $symptom : Dizziness(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 2);
+    $diagnosis.setLymeCount($diagnosis.getLymeCount() + 1);
+end
+
+rule "Sexual Dysfunction Score"
+salience 300
+when
+    $symptom : SexualDysfunction(presence == true)
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 1);
+    $diagnosis.setNMOCount($diagnosis.getNMOCount() + 1);
+end
+
+rule "Vaginal Lubrication Score"
+salience 300
+when
+    $symptom : VaginalLubricationProblems(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 1);
+    $diagnosis.setSjogrenCount($diagnosis.getSjogrenCount() + 1);
+end
+
+rule "Speech Score"
+salience 300
+when
+    $symptom : PoorlyArticulatedSpeech(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 1);
+end
+
+rule "Chewing and Swallowing Score"
+salience 300
+when
+    $symptom : ChewingAndSwallowingProblems(presence == true)
+   $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+then
+    $diagnosis.setScore($diagnosis.getScore() + 1);
+end
+
+
+
+rule "Check Score (below 30)"
+salience 250
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score < 30) from $patient.getDiagnosis()
+then
+    $diagnosis.setDisease(Diagnosis.Disease.NONE);
+    System.out.println($patient.getName() + " does not meet the criteria for EM diagnosis. Score: " + $diagnosis.getScore());
+end
+
+rule "Check Score (Over 30)"
+salience 250
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score>= 30) from $patient.getDiagnosis()
+then
+    
+    System.out.println($patient.getName() + " has a score: " + $diagnosis.getScore()+ ". ");
+    System.out.println("Check other diagnosis");
+end
+
+rule "Check for Neuromyelitis Optica (NMO)"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, NMOCount>=3, questions==true ) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isAntiAQP4()) { 
+        $diagnosis.setDisease(Diagnosis.Disease.NMO);
+    } 
+    update($diagnosis);
+end
+
+rule "Check for Lyme Disease"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, lymeCount>=3, questions==true) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isElisatest()) { 
+        $diagnosis.setDisease(Diagnosis.Disease.LYME);
+    } 
+    update($diagnosis);
+end
+
+
+rule "Check for VitB12 Deficiency"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, vitB12Count>=3, questions==true) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isVitB12()) { 
+        $diagnosis.setDisease(Diagnosis.Disease.VITB12);
+    } 
+    update($diagnosis);
+end
+
+rule "Check for Sarcoidosis"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, sarcoidCount>=3, questions==true) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isACE()) { 
+        $diagnosis.setDisease(Diagnosis.Disease.SARCOIDOSIS);
+    } 
+    update($diagnosis);
+end
+
+rule "Check for Systemic Lupus Erythematosus (SLE)"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, sLECount>=3, questions==true) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isANA()) { 
+        $diagnosis.setDisease(Diagnosis.Disease.SLE);
+    } 
+    update($diagnosis);
+end
+
+rule "Check for Sjogren syndrome"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, sjogrenCount>=3, questions==true) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isAntiSSARo()) { 
+        if($diagnosis.isAntiSSBLa()){
+            $diagnosis.setDisease(Diagnosis.Disease.SJOGREN);
+   }
+ } 
+    update($diagnosis);
+end
+
+rule "Check for Primary CNS vasculiti"
+salience 200
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, cNSCount>=3, questions==true) from $patient.getDiagnosis()
+
+then
+    if ($diagnosis.isIscheamicLesion()) { 
+        $diagnosis.setDisease(Diagnosis.Disease.CNS);
+    } 
+    update($diagnosis);
+end
+
+
+rule "Discard all alternative diagnosis"
+salience 150
+when
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, questions==true) from $patient.getDiagnosis()
+    $mcDonaldCriteria: McDonaldCriteria() from $patient.getMcdonald()
+then 
+    $mcDonaldCriteria.setDiscardDiagnosis(true);
+end
+
+rule "Periventricular lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(exists== true,periventLesion == true, discardDiagnosis ==true) from $patient.getMcdonald()
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Juxtacortical lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(exists== true,juxtacortLesion == true, discardDiagnosis ==true) from $patient.getMcdonald()
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Infratentorial lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(exists== true,infratentLesion == true, discardDiagnosis ==true) from $patient.getMcdonald()
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Spinal cord lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(exists== true,spinalLesion == true, discardDiagnosis ==true) from $patient.getMcdonald()
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Lesion in at least 2 areas"
+salience 70
+when
+    $patient : Patient() 
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(exists== true,lesionCount>=2, discardDiagnosis ==true) from $patient.getMcdonald()
+then 
+    $mcdonaldcriteria.setSpacedisemination(true); 
+end
+
+rule "Diagnose ME"
+salience 50
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis() from $patient.getDiagnosis()
+    $mcdonalcriteria2 : McDonaldCriteria(exists== true,timedisemination== true, spacedisemination==true, discardDiagnosis ==true ) from $patient.getMcdonald()
+then
+    $diagnosis.setDisease(Diagnosis.Disease.ME);
+    
+end
+
+
+
+

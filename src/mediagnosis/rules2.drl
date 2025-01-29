@@ -1,0 +1,61 @@
+rule "Periventricular lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE) from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(periventLesion == true)
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Juxtacortical lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE) from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(juxtacortLesion == true)
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Infratentorial lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE) from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(infratentLesion == true)
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Spinal cord lesion"
+salience 100
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE) from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(spinalLesion == true)
+then 
+    $mcdonaldcriteria.setLesionCount($mcdonaldcriteria.getLesionCount() + 1); 
+end
+
+rule "Lesion in at least 2 areas"
+salience 70
+when
+    $patient : Patient()
+    //camniar todos estos por $mcdonaldcriteria : McDonaldCriteria(discardDiagnosis= true)
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE) from $patient.getDiagnosis()
+    $mcdonaldcriteria : McDonaldCriteria(lesionCount>=2)
+then 
+    $mcdonaldcriteria.setSpacedisemination(true); 
+end
+
+rule "Diagnose ME"
+salience 50
+when 
+    $patient : Patient()
+    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE) from $patient.getDiagnosis()
+    $mcdonalcriteria2 : McDonaldCriteria(timedisemination== true, spacedisemination==true )
+then
+    $diagnosis.setDisease(Diagnosis.Disease.ME)
+    System.out.println($patient.getName() + " does meet the criteria for Multiple Esclerosis, with a score: " + $diagnosis.getScore());
+
