@@ -12,7 +12,7 @@ import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
 
 /**
- *
+ * Clase principal de la interfaz gráfica.
  * @author sofia
  */
 public class FinalMain {
