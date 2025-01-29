@@ -36,7 +36,7 @@ public class Main {
             diag.setElisatest(false);
             diag.setIscheamicLesion(false);
             diag.setVitB12(false);
-            diag.setQuestions(true);
+            //diag.setQuestions(true);
             patient1.setDiagnosis(diag);
             
             DoubleVision dvision= new DoubleVision();
@@ -99,7 +99,7 @@ public class Main {
             mcdonald.setPeriventLesion(true);
             mcdonald.setSpinalLesion(true);
             mcdonald.setTimedisemination(true);
-            mcdonald.setExists(true);
+//            mcdonald.setExists(true);
             patient1.setMcdonald(mcdonald);
             
             

@@ -340,23 +340,23 @@ end
 
 
 
-rule "Check Score (below 30)"
+rule "Check Score (below 18)"
 salience 250
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score < 30) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score < 18) from $patient.getDiagnosis()
 then
     $diagnosis.setDisease(Diagnosis.Disease.NONE);
     System.out.println($patient.getName() + " does not meet the criteria for EM diagnosis. Score: " + $diagnosis.getScore());
 end
 
-rule "Check Score (Over 30)"
+rule "Check Score (Over 18)"
 salience 250
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score>= 30) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score>= 18) from $patient.getDiagnosis()
 then
-    
+    $diagnosis.setQuestions(true);
     System.out.println($patient.getName() + " has a score: " + $diagnosis.getScore()+ ". ");
     System.out.println("Check other diagnosis");
 end
@@ -365,7 +365,7 @@ rule "Check for Neuromyelitis Optica (NMO)"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, NMOCount>=3, questions==true ) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, NMOCount>=3, questions==true ) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isAntiAQP4()) { 
@@ -378,7 +378,7 @@ rule "Check for Lyme Disease"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, lymeCount>=3, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, lymeCount>=3, questions==true) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isElisatest()) { 
@@ -392,7 +392,7 @@ rule "Check for VitB12 Deficiency"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, vitB12Count>=3, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, vitB12Count>=3, questions==true) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isVitB12()) { 
@@ -405,7 +405,7 @@ rule "Check for Sarcoidosis"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, sarcoidCount>=3, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, sarcoidCount>=3, questions==true) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isACE()) { 
@@ -418,7 +418,7 @@ rule "Check for Systemic Lupus Erythematosus (SLE)"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, sLECount>=3, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, sLECount>=3, questions==true) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isANA()) { 
@@ -431,7 +431,7 @@ rule "Check for Sjogren syndrome"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, sjogrenCount>=3, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, sjogrenCount>=3, questions==true) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isAntiSSARo()) { 
@@ -446,7 +446,7 @@ rule "Check for Primary CNS vasculiti"
 salience 200
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, cNSCount>=3, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, cNSCount>=3, questions==true) from $patient.getDiagnosis()
 
 then
     if ($diagnosis.isIscheamicLesion()) { 
@@ -460,10 +460,11 @@ rule "Discard all alternative diagnosis"
 salience 150
 when
     $patient : Patient()
-    $diagnosis : Diagnosis(score > 30, disease == Diagnosis.Disease.NONE, questions==true) from $patient.getDiagnosis()
+    $diagnosis : Diagnosis(score >= 18, disease == Diagnosis.Disease.NONE, questions==true) from $patient.getDiagnosis()
     $mcDonaldCriteria: McDonaldCriteria() from $patient.getMcdonald()
 then 
     $mcDonaldCriteria.setDiscardDiagnosis(true);
+    $mcDonaldCriteria.setExists(true);
 end
 
 rule "Periventricular lesion"

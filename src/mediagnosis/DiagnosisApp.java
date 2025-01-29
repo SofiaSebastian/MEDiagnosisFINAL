@@ -198,11 +198,7 @@ public class DiagnosisApp {
             @Override
             public void actionPerformed(ActionEvent e) {
                 processSymptoms(patient,kieSession);
-                if (patient.getDiagnosis().getScore() >= 30) {
-                    cardLayout.show(mainPanel, "Discard alternative diagnosis");
-                }else {
-                    cardLayout.show(mainPanel, "DiagnosisResult");
-                }
+                cardLayout.show(mainPanel, "Discard alternative diagnosis");
                 }
                 
             
@@ -226,7 +222,7 @@ public class DiagnosisApp {
     continueButton.addActionListener(new ActionListener() {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (patient.getDiagnosis().getScore() >= 30) {
+            
                 patient.getDiagnosis().setQuestions(true);
 
                 
@@ -307,19 +303,16 @@ public class DiagnosisApp {
                     "Have follow-up MRI scans shown new T2 lesions or gadolinium-enhancing lesions compared to previous scans?”", 
                     "", 
                     JOptionPane.YES_NO_OPTION);
-                patient.getMcdonald().setPeriventLesion(confirm12 == JOptionPane.YES_OPTION);
+                patient.getMcdonald().setTimedisemination(confirm12 == JOptionPane.YES_OPTION);
                 
                 
                 try {
                   patient=FinalMain.insertSession(kieSession, patient, dvision, eyedisc, vlossOne, lossbalan, muscspasm, numbness, chew, constip, coord, discern, attention, dep, urinat, dizz, shock, facial, fecal, frequrin, invEye, memory, stiff, speech, arms, fatigue, sexual, tingling, uriIncon, vaginal, walking);  
-                  // Results
-                  JPanel diagnosisResultPanel = createDiagnosisResultPanel(patient, kieSession);
-                  mainPanel.add(diagnosisResultPanel, "DiagnosisResult");
+                  intermediateCreate(kieSession);
                 } catch (Exception ex) {
                     ex.printStackTrace();
                 }
-                statusLabel.setText("Score above 30"); 
-            }
+            
             cardLayout.show(mainPanel, "DiagnosisResult");
            
         }
@@ -345,28 +338,28 @@ public class DiagnosisApp {
         String mes="";
         String mes2="";
         if( patient.getDiagnosis().getDisease()==Diagnosis.Disease.ME){
-             mes="yes";
-             mes2="no";
+             mes=" Yes";
+             mes2=" No";
         }else {
-             mes="no";
+             mes=" No";
         }
         
         if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.CNS){
-            mes2="Yes,  Primary CNS Vasculitis is diagnosed";
+            mes2=" Yes,  Primary CNS Vasculitis is diagnosed";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.LYME){
-        mes2="Yes, Lyme disease is diagnosed ";
+        mes2=" Yes, Lyme disease is diagnosed ";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.NMO){
-            mes2="Yes, Neuromyelitis Optica is diagnosed";
+            mes2=" Yes, Neuromyelitis Optica is diagnosed";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.SARCOIDOSIS){
-            mes2="Yes, Sarcoidosis is diagnosed";
+            mes2=" Yes, Sarcoidosis is diagnosed";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.SJOGREN){
-            mes2="Yes, Sjogren syndrome is diagnosed";
+            mes2=" Yes, Sjogren syndrome is diagnosed";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.SLE){
-            mes2="Yes, Systemic Lupus Erythemateous is diagnosed";
+            mes2=" Yes, Systemic Lupus Erythemateous is diagnosed";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.VITB12){
-            mes2="Yes, vitamin B12 deficiency is diagnosed";
+            mes2=" Yes, vitamin B12 deficiency is diagnosed";
         }else if(patient.getDiagnosis().getDisease()==Diagnosis.Disease.NONE){
-            mes2="no";
+            mes2="No";
         }
         
         
@@ -374,16 +367,7 @@ public class DiagnosisApp {
         String message = "ID:"+patient.getId()+"\n"+ "Score:"+patient.getDiagnosis().getScore()+ "\n" + "Is multiple sclerosis diagnosed?" +mes+"\n" +"Is any other similar disease diagnosed?:" + mes2 ;
         resultArea.setText(message);
         System.out.println(patient.getDiagnosis().getDisease());
-        
-//        JButton restartButton = new JButton("New Patient");
-//        restartButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                
-//                cardLayout.show(mainPanel, "PatientInfo");
-//            }
-//        });
-        
+
         JButton exitButton = new JButton("Exit");
         exitButton.addActionListener(new ActionListener() {
             @Override
@@ -395,12 +379,15 @@ public class DiagnosisApp {
         
         panel.add(new JScrollPane(resultArea), BorderLayout.CENTER);
         JPanel buttonPanel = new JPanel(new FlowLayout(FlowLayout.CENTER)); 
-//        buttonPanel.add(restartButton); 
         buttonPanel.add(exitButton);    
-
         panel.add(buttonPanel, BorderLayout.SOUTH); 
         
         return panel;
+    }
+    private void intermediateCreate(KieSession kieSession){
+        // Results
+                  JPanel diagnosisResultPanel = createDiagnosisResultPanel(patient, kieSession);
+                  mainPanel.add(diagnosisResultPanel, "DiagnosisResult");
     }
     private void processSymptoms(Patient patient, KieSession kieSession) {
         try {
@@ -502,13 +489,7 @@ public class DiagnosisApp {
             }
         }
         
-        
-        this.patient=FinalMain.insertSession(kieSession, patient, dvision, eyedisc, vlossOne, lossbalan, muscspasm, numbness, chew, constip, coord, discern, attention, dep, urinat, dizz, shock, facial, fecal, frequrin, invEye, memory, stiff, speech, arms, fatigue, sexual, tingling, uriIncon, vaginal, walking);
-        if(patient.getDiagnosis().getScore()<30){
-                    JPanel diagnosisResultPanel = createDiagnosisResultPanel(patient, kieSession);
-                    mainPanel.add(diagnosisResultPanel, "DiagnosisResult");
-        }
-
+    
         } catch (Exception e) {
             resultArea.setText("Error: " + e.getMessage());
             e.printStackTrace();
