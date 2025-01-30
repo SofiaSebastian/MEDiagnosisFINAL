@@ -233,8 +233,8 @@ public class DiagnosisApp {
                 patient.getDiagnosis().setAntiAQP4(confirm == JOptionPane.YES_OPTION);
 
                 int confirm1 = JOptionPane.showConfirmDialog(frame, 
-                    "Is the patient positive in Elisa test?", 
-                    "Positive Elisa test", 
+                    "Is the patient positive in Elisa and Western blot tests?", 
+                    "Positive", 
                     JOptionPane.YES_NO_OPTION);
                 patient.getDiagnosis().setElisatest(confirm1 == JOptionPane.YES_OPTION);
 
