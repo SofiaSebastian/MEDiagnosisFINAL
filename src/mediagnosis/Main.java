@@ -28,7 +28,7 @@ public class Main {
             Patient patient1= new Patient("Sofia",20,70834217);
             
             Diagnosis diag= new Diagnosis();
-            diag.setAntiAQP4(false);
+            diag.setAntiAQP4(true);
             diag.setACE(false);
             diag.setANA(false);
             diag.setAntiSSARo(false);
@@ -71,33 +71,33 @@ public class Main {
             
 
             invEye.setPresence(true);
-            dvision.setPresence(true);
+            vlossOne.setPresence(true);
             lossbalan.setPresence(true);
-            muscspasm.setPresence(true);
-            facial.setPresence(true);
+            numbness.setPresence(true);
+            //facial.setPresence(true);
            // tingling.setPresence(true);
             arms.setPresence(true);
             walking.setPresence(true);
             coord.setPresence(true);
             //stiff.setPresence(true);
             shock.setPresence(true);
-            fecal.setPresence(true);
+            fatigue.setPresence(true);
             frequrin.setPresence(true);
             uriIncon.setPresence(true);
-            dep.setPresence(true);
-            attention.setPresence(true);
-            vaginal.setPresence(true);
-            discern.setPresence(true);
+            memory.setPresence(true);
             dizz.setPresence(true);
-            //speech.setPresence(true);
-            chew.setPresence(true);
-            
+            sexual.setPresence(true);
+            speech.setPresence(true);
+//            dizz.setPresence(true);
+//            //speech.setPresence(true);
+//            chew.setPresence(true);
+//            
             
             McDonaldCriteria mcdonald= new McDonaldCriteria();
             mcdonald.setInfratentLesion(false);
-            mcdonald.setJuxtacortLesion(true);
-            mcdonald.setPeriventLesion(true);
-            mcdonald.setSpinalLesion(true);
+            mcdonald.setJuxtacortLesion(false);
+            mcdonald.setPeriventLesion(false);
+            mcdonald.setSpinalLesion(false);
             mcdonald.setTimedisemination(true);
 //            mcdonald.setExists(true);
             patient1.setMcdonald(mcdonald);

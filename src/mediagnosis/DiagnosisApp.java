@@ -184,7 +184,7 @@ public class DiagnosisApp {
             "Fecal Incontinence", "Difficulty Starting Urination", "Frequent Urination", "Urinary Incontinence",
             "Depression", "Decreased Attention Span", "Memory Loss", "Decreased Ability to Discern", 
             "Dizziness", "Vaginal Lubrication Problems", "Sexual Dysfunction", 
-            "Poorly Articulates Speech", "Problems Chewing and Swallowing"
+            "Poorly Articulated Speech", "Problems Chewing and Swallowing"
         };
 
         for (String symptom : symptoms) {
@@ -403,7 +403,7 @@ public class DiagnosisApp {
                 case "Eye Discomfort":
                     eyedisc.setPresence(isSelected);
                     break;
-                case "Vision Loss One Eye":
+                case "Vision Loss (One Eye At A Time)":
                     vlossOne.setPresence(isSelected);
                     break;
                 case "Loss Of Balance":
@@ -436,7 +436,7 @@ public class DiagnosisApp {
                 case "Coordination Problems":
                     coord.setPresence(isSelected);
                     break;
-                case "Electric Shocks Neck Movement":
+                case "Electric Shocks with Neck Movement":
                     shock.setPresence(isSelected);
                     break;
                 case "Constipation":
